@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head></h:head>
+<h:body>
+    <f:view contentType="text/html">
+        <center>
+            <h:form><p align="right"><h:commandLink value="Вийти з системи" style="font-size: large"
+                                                    action="#{bank.logout}"/>
+            </p></h:form>
+            <h:outputLabel id="info" style="color: orangered" value="#{bank.info}"/>
+
+            <h2>Сторінка клієнта</h2>
+
+            <p align="right">
+
+                <h:link value="Всі клієнти" outcome="clientslist?faces-redirect=true"/>
+                <br/>
+                <h:link value="Історія платежів" outcome="operations?faces-redirect=true"/>
+            </p>
+
+            <h:panelGrid columns="2">
+                Клієнт
+                <h:outputLabel value="#{bank.person.name} #{bank.person.surname}"/>
+                Номер рахунку
+                <h:outputLabel value="#{bank.person.accountNum}"/>
+                Баланс
+                <h:inputText id="balance" disabled="true" size="6" rendered="true" value="#{bank.person.sum} грн">
+
+                </h:inputText>
+            </h:panelGrid>
+            <br/>
+            <hr/>
+            <br/>
+
+            <h:form id="f1">
+                <h:panelGrid columns="2">
+                    Здійснити поповнення на суму
+                    <h:inputText value="#{bank.addSum}" size="6" id="upd" required="true"
+                                 requiredMessage="Введіть суму"
+                                 validatorMessage="Введіть суму від 1 до 10000"
+                                 converterMessage="Введіть суму від 1 до 10000, наприклад 12.35">
+                        <f:validateDoubleRange minimum="1" maximum="10000"/>
+
+                    </h:inputText>
+
+                </h:panelGrid>
+                <h:commandButton value="OK" action="#{bank.income}">
+                </h:commandButton>
+                <br/>
+                <h:message for="upd" style="color: Red;"/>
+            </h:form>
+
+
+            <hr/>
+            <br/>
+
+            Переказати суму на рахунок
+            <br/>
+
+            <h:form>
+                <h:selectOneMenu id="select" value="#{bank.toPerson}">
+                    <f:selectItems value="#{bank.persons}" itemValue="#{person.accountNum}" var="person"
+                                   itemLabel="#{person.surname} #{person.name} #{person.accountNum}"/>
+                </h:selectOneMenu>
+
+                <p/>
+
+                Сума:
+
+                <h:inputText value="#{bank.subtractSum}" size="6" id="sum" required="true"
+                             requiredMessage="Введіть суму переказу"
+                             validatorMessage="Введіть суму від 1 до 10000"
+                             converterMessage="Введіть суму від 1 до 10000, наприклад 12.35">
+                    <f:validateDoubleRange minimum="1" maximum="10000"/>
+                </h:inputText>
+                <h:commandButton value="ОК" action="#{bank.moneyTransfer}">
+                </h:commandButton>
+                <br/>
+                <h:message for="sum" style="color: orangered"/>
+            </h:form>
+            <br/>
+            <hr/>
+            <br/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    Переказати за послуги суму
+                    <h:inputText value="#{bank.subtractSum}" size="6" id="off" required="true"
+                                 requiredMessage="Введіть суму"
+                                 validatorMessage="Введіть суму від 1 до 10000"
+                                 converterMessage="Введіть суму від 1 до 10000, наприклад 12.35">
+                        <f:validateDoubleRange minimum="1" maximum="10000"/>
+                    </h:inputText>
+                    Призначення платежу:
+                    <h:inputTextarea id="details" value="#{bank.message.description}" required="true"
+                                     requiredMessage="Введіть призначення платежу"/>
+                </h:panelGrid>
+                <h:commandButton value="OK" action="#{bank.writeOff}">
+                </h:commandButton>
+                <br/>
+                <h:message for="details" style="color: Red;"/>
+                <br/>
+                <h:message for="off" style="color: Red;"/>
+
+            </h:form>
+        </center>
+    </f:view>
+</h:body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head></h:head>
+<h:body>
+    <f:view contentType="text/html">
+        <center>
+            <h:outputLabel value="Реєстрація в системі" style="color:Blue; font-size:large;"/>
+            <h:form id="registration">
+                <h:panelGrid cellspacing="20" columns="3">
+                    <h:outputLabel value="Номер рахунку"/>
+                    <h:inputText value="#{bank.accountNum}" id="acc_numb" required="true" requiredMessage="Заповніть"
+                                 validatorMessage="Введіть десять цифр" converterMessage="Введіть десять цифр">
+                        <f:validateLength minimum="10" maximum="10"/>
+                        <f:validateLongRange minimum="1" maximum="9999999999"/>
+                        <f:ajax event="keyup" render="info" execute="acc_numb"/>
+                    </h:inputText>
+                    <h:message for="acc_numb" style="color: orangered"/>
+                    <h:outputLabel value="Сума"/>
+                    <h:inputText value="#{bank.sum}" id="sum" required="true" requiredMessage="Заповніть"
+                                 validatorMessage="Введіть суму від 1 до 10000"
+                                 converterMessage="Введіть суму від 1 до 10000, наприклад 12.35">
+                        <f:validateDoubleRange maximum="10000" minimum="1"/>
+                    </h:inputText>
+                    <h:message for="sum" style="color: orangered"/>
+                    <h:outputLabel value="Прізвище"/>
+                    <h:inputText value="#{bank.surname}" id="surn" required="true" requiredMessage="Заповніть"/>
+                    <h:message for="surn" style="color: orangered"/>
+                    <h:outputLabel value="Ім'я"/>
+                    <h:inputText value="#{bank.name}" id="name" required="true" requiredMessage="Заповніть"/>
+                    <h:message for="name" style="color: orangered"/>
+                    <h:outputLabel value="Пароль"/>
+                    <h:inputSecret value="#{bank.password}" id="pass" binding="#{confirmPassword}"
+                                   required="true"
+                                   requiredMessage="Заповніть" validatorMessage="Введіть мінімум 6 символів">
+                        <f:validateLength minimum="6"/>
+                    </h:inputSecret>
+                    <h:message id="m_password" for="pass" style="color: orangered"/>
+                    <h:outputLabel value="Повтор паролю"/>
+                    <h:inputSecret var="pass2" id="pass2" required="true"
+                                   validatorMessage="Невірний повтор паролю"
+                                   requiredMessage="Повторіть пароль">
+                        <f:validateLength minimum="6"/>
+                        <f:validator validatorId="passwordValidator"/>
+                        <f:attribute name="confirmPassword" value="#{confirmPassword}"/>
+                    </h:inputSecret>
+
+                    <h:message id="m_confirm" for="pass2" style="color: orangered"/>
+                </h:panelGrid>
+                <h:commandButton value="ОК" action="#{bank.registrated}"/>
+                <br/><br/>
+
+                <h:outputLabel value="#{bank.numbCheck}" id="info" style="color: red"/>
+            </h:form>
+        </center>
+    </f:view>
+</h:body>
+</html>

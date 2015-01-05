@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <center>
+        <h:form>
+            <h1>Список клієнтів</h1>
+
+            <h:dataTable value="#{bank.persons}" var="person" cellspacing="1" border="1">
+                <h:column>
+                    <f:facet name="header">Прізвище</f:facet>
+                    #{person.surname}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Ім"я</f:facet>
+                    #{person.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Номер рахунку</f:facet>
+                    #{person.accountNum}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Сума</f:facet>
+                    #{person.sum} грн
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <h:link value="Сторінка клієнта" outcome="clientpage?faces-redirect=true"/>
+            <!--{bank.info=null}-->
+        </h:form>
+    </center>
+</f:view>
+</html>

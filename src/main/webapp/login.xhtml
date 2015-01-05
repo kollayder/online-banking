@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head></h:head>
+<h:body>
+    <f:view contentType="text/html">
+        <center>
+            <h1>Вхід у систему</h1>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Номер рахунку"/>
+                    <h:inputText value="#{bank.accountNum}" id="acc_number" required="true"
+                                 requiredMessage="Введіть номер рахунку"
+                                 validatorMessage="Введіть десять цифр" converterMessage="Введіть десять цифр">
+                        <f:validateLength minimum="10" maximum="10"/>
+                        <f:validateLongRange minimum="0" maximum="9999999999"/>
+                    </h:inputText>
+                    <h:message showSummary="false" for="acc_number" style="color: orangered"/>
+                    <h:outputText value="Пароль"/>
+                    <h:inputSecret value="#{bank.password}" id="pass" required="true" requiredMessage="Введіть пароль"
+                                   validatorMessage="Введіть мінімум 6 символів">
+                        <f:validateLength minimum="6"/>
+                        <f:ajax event="keyup" execute="acc_number pass" render="err"/>
+                    </h:inputSecret>
+                    <h:message for="pass" style="color: orangered"/>
+                </h:panelGrid>
+                <h:commandButton id="ok" value="ОК" action="#{bank.loginCheck}"/>
+                <br/><br/>
+                <h:outputLabel id="err" value="#{bank.authCheck}" style="color: orangered"/>
+            </h:form>
+            <br/>
+
+            <h:form>
+                <h:commandLink value="Зареєструватися" action="registration?faces-redirect=true"/>
+            </h:form>
+        </center>
+    </f:view>
+</h:body>
+</html>
