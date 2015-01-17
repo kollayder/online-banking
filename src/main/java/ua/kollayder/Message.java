@@ -9,9 +9,7 @@ import java.util.Date;
 
 import static ua.kollayder.BankBean.roundCost;
 
-/**
- * Created by Nastya_G on 08.12.2014.
- */
+
 @Entity
 public class Message implements Serializable {
     private static final long serialVersionUID = 4L;

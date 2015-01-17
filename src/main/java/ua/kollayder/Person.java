@@ -12,9 +12,6 @@ import java.util.List;
 
 import static ua.kollayder.BankBean.roundCost;
 
-/**
- * Created by Nastya_G on 01.12.2014.
- */
 @Entity
 public class Person implements Comparable<Person>, Comparator<Person>, Serializable {
     private static final long serialVersionUID = 2L;
@@ -87,6 +84,25 @@ public class Person implements Comparable<Person>, Comparator<Person>, Serializa
         this.sum = sum;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+
+        Person person = (Person) o;
+
+        if (!accountNum.equals(person.accountNum)) return false;
+        if (!password.equals(person.password)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = accountNum.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
+    }
 
     @Override
     public int compareTo(Person p) {

@@ -8,9 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Nastya_G on 01.12.2014.
- */
 @ManagedBean(name = "bank")
 @SessionScoped
 public class BankBean implements Serializable {

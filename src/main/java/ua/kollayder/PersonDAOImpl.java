@@ -9,9 +9,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-/**
- * Created by Nastya_G on 07.12.2014.
- */
+
 public class PersonDAOImpl implements PersonDAO {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 

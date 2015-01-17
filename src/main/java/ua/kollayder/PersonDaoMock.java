@@ -6,9 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Nastya_G on 01.12.2014.
- */
 public class PersonDaoMock implements PersonDAO, Serializable {
     private static final long serialVersionUID = 1L;
     private List<Person> personList;
